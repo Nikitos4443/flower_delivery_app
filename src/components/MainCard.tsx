@@ -1,6 +1,17 @@
-import {Button} from "@/components/ui/button";
+"use client"
 
-function MainCard({ title, imageUrl, isFavorite }: MainCardProps) {
+import {Button} from "@/components/ui/button";
+import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
+import {addToCart, removeFromCart} from "@/lib/redux/slices/cart";
+
+function MainCard(props: MainCardProps) {
+    const { id, title, imageUrl, isFavorite, price } = props
+
+    const cart = useAppSelector((state) => state.cart.chosenFlowers)
+    const isInCart = cart.some(f => f.id === id)
+
+    const dispatch = useAppDispatch();
+
     return (
         <div className="border rounded-lg w-60 p-4 text-center shadow-md flex flex-col items-center">
             <img
@@ -12,12 +23,22 @@ function MainCard({ title, imageUrl, isFavorite }: MainCardProps) {
             <img
                 src={isFavorite ? '/favourite.png' : '/notFavourite.png'}
                 alt={isFavorite ? 'В улюблених' : 'Не в улюблених'}
-                className="mx-auto w-6 h-6 mb-3"
+                className="mx-auto w-6 h-6 mb-3 cursor-pointer"
             />
-            <Button>
-                Add to Cart
-            </Button>
+
+            <p className="text-gray-700 font-medium mb-3">{price} ₴</p>
+
+            {isInCart ? (
+                <Button onClick={() => dispatch(removeFromCart(props))}>
+                    Remove from Cart
+                </Button>
+            ) : (
+                <Button onClick={() => dispatch(addToCart(props))}>
+                    Add to Cart
+                </Button>
+            )}
         </div>
+
     );
 }
 

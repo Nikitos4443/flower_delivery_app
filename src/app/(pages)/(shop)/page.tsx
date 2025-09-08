@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {shops} from "@/constants/shops"
 import {cards} from "@/constants/cards";
 import MainCard from "@/components/MainCard";
@@ -20,7 +19,7 @@ export default function Shop() {
                 <section className="w-2/3 sm:overflow-y-auto flex flex-wrap gap-10 justify-center max-sm:h-100">
                     {cards.map((card) => {
                         return (
-                            <MainCard key={card.id} title={card.title} imageUrl={card.imageUrl} isFavorite={card.isFavorite} />
+                            <MainCard key={card.id} {...card} />
                         )
                     })}
                 </section>
