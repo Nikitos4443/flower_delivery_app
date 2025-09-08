@@ -117,7 +117,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-[100vh] w-[100vw];
+  }
+
+  main {
+    @apply px-20 flex flex-col gap-8 bg-background h-9/10 pt-10 max-sm:px-0 overflow-hidden;
   }
 }
 
@@ -128,6 +132,6 @@
     }
 
     .navbar {
-        @apply flex h-15 justify-between items-center py-5 px-10 border-b border-gray-200 rounded-lg max-sm:flex-col max-sm:h-full;
+        @apply flex h-1/10 justify-between items-center py-5 px-10 border-b border-gray-200 rounded-lg max-sm:flex-col max-sm:h-30;
     }
 }
