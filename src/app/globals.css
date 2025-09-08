@@ -120,3 +120,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+
+    .flex-center {
+        @apply flex h-full w-full justify-center items-center;
+    }
+
+    .navbar {
+        @apply flex h-15 justify-between items-center py-5 px-10 border-b border-gray-200 rounded-lg max-sm:flex-col max-sm:h-full;
+    }
+}
