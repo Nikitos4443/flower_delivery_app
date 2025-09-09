@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button";
 import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
 import {addToCart, removeFromCart} from "@/lib/redux/slices/cart";
 
-function MainCard(props: MainCardProps) {
+function MainCard(props: CardProps) {
     const { id, title, imageUrl, isFavorite, price } = props
 
     const cart = useAppSelector((state) => state.cart.chosenFlowers)
@@ -13,7 +13,7 @@ function MainCard(props: MainCardProps) {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="border rounded-lg w-60 p-4 text-center shadow-md flex flex-col items-center">
+        <div className="border max-h-fit rounded-lg w-60 p-4 text-center shadow-md flex flex-col items-center">
             <img
                 src={imageUrl}
                 alt={title}

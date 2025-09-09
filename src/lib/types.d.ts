@@ -4,6 +4,12 @@ type Flower = {
     imageUrl: string;
     isFavorite: boolean;
     price: number;
+    shopId: number;
 }
 
-type MainCardProps = Flower;
+type Shop = {
+    id: number;
+    title: string;
+}
+
+type CardProps = Flower;
