@@ -1,15 +1,15 @@
 type Flower = {
-    id: number;
+    _id: string;
     title: string;
     imageUrl: string;
     isFavorite: boolean;
     price: number;
-    shopId: number;
+    shop: string;
 }
 
 type Shop = {
-    id: number;
-    title: string;
+    _id: string;
+    name: string;
 }
 
 type CardProps = Flower;

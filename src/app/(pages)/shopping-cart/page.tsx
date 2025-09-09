@@ -109,7 +109,7 @@ function ShoppingCart() {
                     {cart.length > 0 ? (
                         <>
                             {cart.map((item) => (
-                                <ShoppingCartCard key={item.id} {...item} />
+                                <ShoppingCartCard key={item._id} {...item} />
                             ))}
                         </>
                     ): (

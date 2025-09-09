@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button"
-import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
+import {useAppDispatch} from "@/lib/redux/hooks";
 import {decrementCount, incrementCount} from "@/lib/redux/slices/cart";
 
 function ShoppingCartCard(props: CardProps & {count: number}) {
@@ -24,10 +24,10 @@ function ShoppingCartCard(props: CardProps & {count: number}) {
                 Count: {props.count}
             </div>
             <div className="flex flex-col items-center gap-4">
-                <Button onClick={() => {dispatch(incrementCount(props.id))}}>
+                <Button onClick={() => {dispatch(incrementCount(props._id))}}>
                     Increment
                 </Button>
-                <Button onClick={() => {dispatch(decrementCount(props.id))}}>
+                <Button onClick={() => {dispatch(decrementCount(props._id))}}>
                     Decrement
                 </Button>
             </div>

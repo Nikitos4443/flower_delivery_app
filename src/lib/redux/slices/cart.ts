@@ -21,26 +21,26 @@ export const cartSlice = createSlice({
             console.log(state.chosenFlowers)
         },
         removeFromCart: (state, action: PayloadAction<Flower>) => {
-            const index = state.chosenFlowers.findIndex(f => f.id === action.payload.id)
+            const index = state.chosenFlowers.findIndex(f => f._id === action.payload._id)
             if (index >= 0) {
                 state.chosenFlowers.splice(index, 1)
             }
             localStorage.setItem('cart', JSON.stringify(state.chosenFlowers))
         },
-        incrementCount: (state, action: PayloadAction<number>) => {
-            const flower = state.chosenFlowers.find(f => f.id === action.payload)
+        incrementCount: (state, action: PayloadAction<string>) => {
+            const flower = state.chosenFlowers.find(f => f._id === action.payload)
             if (flower) {
                 flower.count += 1
             }
             localStorage.setItem('cart', JSON.stringify(state.chosenFlowers))
         },
-        decrementCount: (state, action: PayloadAction<number>) => {
-            const flower = state.chosenFlowers.find(f => f.id === action.payload)
+        decrementCount: (state, action: PayloadAction<string>) => {
+            const flower = state.chosenFlowers.find(f => f._id === action.payload)
             if (flower) {
                 flower.count -= 1
 
                 if(flower.count === 0){
-                    state.chosenFlowers = state.chosenFlowers.filter(f => f.id !== flower.id)
+                    state.chosenFlowers = state.chosenFlowers.filter(f => f._id !== flower._id)
                 }
             }
 
