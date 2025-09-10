@@ -18,7 +18,6 @@ export const cartSlice = createSlice({
         addToCart: (state, action: PayloadAction<Flower>) => {
             state.chosenFlowers.push({...action.payload, count: 1})
             localStorage.setItem('cart', JSON.stringify(state.chosenFlowers))
-            console.log(state.chosenFlowers)
         },
         removeFromCart: (state, action: PayloadAction<Flower>) => {
             const index = state.chosenFlowers.findIndex(f => f._id === action.payload._id)
@@ -45,10 +44,13 @@ export const cartSlice = createSlice({
             }
 
             localStorage.setItem('cart', JSON.stringify(state.chosenFlowers))
+        },
+        clear: (state) => {
+            state.chosenFlowers = []
         }
     },
 })
 
-export const { addToCart, removeFromCart, incrementCount, decrementCount } = cartSlice.actions
+export const { addToCart, removeFromCart, incrementCount, decrementCount, clear } = cartSlice.actions
 
 export default cartSlice.reducer
