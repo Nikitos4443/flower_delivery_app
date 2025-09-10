@@ -12,7 +12,6 @@ export default async function OrderDetails({ params }: OrderPageProps) {
     const resolvedParams = await params;
 
     const order = await Order.findById(resolvedParams.id)
-        .populate({ path: "flowers.shop", model: Shop, select: "name" })
         .lean() as any;
 
     if (!order) {
@@ -42,7 +41,7 @@ export default async function OrderDetails({ params }: OrderPageProps) {
 
                 <h2 className="text-xl font-semibold mb-4">Flowers</h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    {order.flowers.map((flower: any) => (
+                    {order.flowers.map(({flower, count}: any) => (
                         <li
                             key={flower._id}
                             className="border rounded-lg p-4 flex gap-4 items-center shadow-sm hover:shadow-md transition"
@@ -56,7 +55,7 @@ export default async function OrderDetails({ params }: OrderPageProps) {
                                 <p className="font-medium text-gray-800">{flower.title}</p>
                                 <p className="text-sm text-gray-500">Shop: {flower.shop?.name || "N/A"}</p>
                                 <p className="text-sm text-gray-700 mt-1">
-                                    {flower.price} ₴ × {flower.count}
+                                    {flower.price} ₴ × {count}
                                 </p>
                             </div>
                         </li>

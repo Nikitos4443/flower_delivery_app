@@ -7,11 +7,20 @@ const orderSchema = new Schema(
         userPhone: String,
         userEmail: String,
         userAddress: String,
-        flowers: [flowerSchema],
+        flowers: [
+              {
+                    flower: { type: flowerSchema, required: true },
+                    count: { type: Number, required: true, min: 1 }
+              }
+        ],
         totalPrice: Number
     },
     { timestamps: true }
 );
+
+if (mongoose.models.Order) {
+    mongoose.deleteModel("Order");
+}
 
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 

@@ -115,7 +115,7 @@ function OrderHistory() {
                                 <div className="border-t pt-4">
                                     <h4 className="font-medium mb-2">Flowers:</h4>
                                     <ul className="flex flex-col gap-3">
-                                        {order.flowers.map(flower => (
+                                        {order.flowers.map(({flower, count}) => (
                                             <li
                                                 key={flower._id}
                                                 className="flex items-center gap-4 border rounded-lg p-3 hover:bg-gray-50"
@@ -128,7 +128,7 @@ function OrderHistory() {
                                                 <div className="flex flex-col">
                                                     <span className="font-medium">{flower.title}</span>
                                                     <span className="text-sm text-gray-600">
-                                                      ${flower.price}
+                                                      ${flower.price} * {count}
                                                     </span>
                                                 </div>
                                             </li>

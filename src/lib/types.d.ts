@@ -20,7 +20,7 @@ type Order = {
     userEmail: string;
     userAddress: string;
     userName: string;
-    flowers: Flower[];
+    flowers: Array<{flower: Flower, count: number}>
     totalPrice: number;
     createdAt: string;
 }
