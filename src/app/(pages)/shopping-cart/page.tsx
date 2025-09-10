@@ -38,7 +38,7 @@ export default function ShoppingCart() {
     const dispatch = useAppDispatch();
 
     const totalPrice = useCallback(() => {
-        return cart.reduce((acc, flower) => acc + flower.price * flower.count, 0)
+        return cart.reduce((acc, item) => acc + item.flower.price * item.count, 0)
     }, [cart])
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -52,7 +52,7 @@ export default function ShoppingCart() {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-
+        console.log(cart)
         const dto = {
             userName: values.name,
             userEmail: values.email,
@@ -144,7 +144,7 @@ export default function ShoppingCart() {
                     {cart.length > 0 ? (
                         <>
                             {cart.map((item) => (
-                                <ShoppingCartCard key={item._id} {...item} />
+                                <ShoppingCartCard key={item.flower._id} flower={item.flower} count={item.count} />
                             ))}
                         </>
                     ): (

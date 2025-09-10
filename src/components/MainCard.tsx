@@ -6,10 +6,10 @@ import {addToCart, removeFromCart} from "@/lib/redux/slices/cart";
 import {useState} from "react";
 
 function MainCard(props: CardProps) {
-    const { _id, title, imageUrl, isFavorite, price } = props
+    const { _id, title, imageUrl, price } = props
 
     const cart = useAppSelector((state) => state.cart.chosenFlowers)
-    const isInCart = cart.some(f => f._id === _id)
+    const isInCart = cart.some(f => f.flower._id === _id)
 
     const [isFavourite, setIsFavourite] = useState<boolean>(() => {
         const favouritesStr = localStorage.getItem('favourites');
