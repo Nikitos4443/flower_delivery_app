@@ -2,7 +2,7 @@ import Order from "@/lib/models/Order"
 import connectMongoDB from "@/lib/mongoose";
 import {NextRequest, NextResponse} from "next/server";
 
-export async function POST(request: NextRequest, res: NextResponse) {
+export async function POST(request: NextRequest) {
     try {
         const data = await request.json();
         await connectMongoDB();

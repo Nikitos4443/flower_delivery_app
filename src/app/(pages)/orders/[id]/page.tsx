@@ -3,13 +3,15 @@ import Order from "@/lib/models/Order";
 import Shop from "@/lib/models/Shop";
 
 interface OrderPageProps {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export default async function OrderDetails({ params }: OrderPageProps) {
     await connectMongoDB();
 
-    const order = await Order.findById(params.id)
+    const resolvedParams = await params;
+
+    const order = await Order.findById(resolvedParams.id)
         .populate({ path: "flowers.shop", model: Shop, select: "name" })
         .lean() as any;
 
