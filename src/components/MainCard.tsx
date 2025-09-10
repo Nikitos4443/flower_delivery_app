@@ -45,7 +45,7 @@ function MainCard(props: CardProps) {
             <img
                 src={imageUrl}
                 alt={title}
-                className="w-full h-36 object-cover rounded-md"
+                className="w-full h-36 object-contain rounded-md"
             />
             <h3 className="mt-3 mb-2 text-lg font-semibold">{title}</h3>
             <img
