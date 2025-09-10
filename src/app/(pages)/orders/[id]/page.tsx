@@ -46,9 +46,9 @@ export default async function OrderDetails({ params }: OrderPageProps) {
                             className="border rounded-lg p-4 flex gap-4 items-center shadow-sm hover:shadow-md transition"
                         >
                             <img
-                                src={`/${flower.imageUrl}`}
+                                src={`${flower.imageUrl}`}
                                 alt={flower.title}
-                                className="w-20 h-20 object-cover rounded-lg"
+                                className="w-20 h-20 object-contain "
                             />
                             <div className="flex-1">
                                 <p className="font-medium text-gray-800">{flower.title}</p>
