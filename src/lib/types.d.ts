@@ -13,3 +13,5 @@ type Shop = {
 }
 
 type CardProps = Flower;
+
+type Sorting =  'price' | 'createdAt' | null;
