@@ -41,7 +41,6 @@ export default function Shop() {
                 const firstShopId = dataShops.shops[0]._id;
                 setChosenShop(firstShopId);
             }
-            setIsLoading(false);
         }
 
         getShops();
@@ -116,21 +115,18 @@ export default function Shop() {
                 <section className="w-2/3 sm:overflow-y-auto flex flex-wrap gap-10 justify-center max-sm:h-100">
                     {flowers.map((card) => {
                         return (
-                            <MainCard key={card._id} {...card} />
+                            <div key={card._id} className="last:pb-20">
+                                <MainCard {...card} />
+                            </div>
                         )
                     })}
                 </section>
             </div>
-            <div className="h-[10%] flex gap-5 items-center">
-                <Button disabled={page===1} onClick={handlePrev}>
-                    {"<-"}
-                </Button>
-                <span>
-                    {page}/{totalPages}
-                </span>
-                <Button disabled={page === totalPages} onClick={handleNext}>
-                    {"->"}
-                </Button>
+            <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/90 backdrop-blur-sm border-t sm:static sm:bg-transparent sm:border-t-0
+                h-16 flex items-center justify-center gap-4 p-3">
+                <Button disabled={page===1} onClick={handlePrev}>{"<-"}</Button>
+                <span>{page}/{totalPages}</span>
+                <Button disabled={page === totalPages} onClick={handleNext}>{"->"}</Button>
             </div>
             <ToastContainer />
         </main>

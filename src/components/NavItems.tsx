@@ -5,7 +5,8 @@ import {cn} from "@/lib/utils";
 
 const navItems = [
     { label: "Shop", href: "/", },
-    { label: "ShoppingCart", href: "/shopping-cart", }
+    { label: "Shopping Cart", href: "/shopping-cart", },
+    { label: "Orders History", href: "/orders", }
 ]
 
 function NavItems({pathName}: {pathName: string}) {

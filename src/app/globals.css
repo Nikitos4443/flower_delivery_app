@@ -135,7 +135,7 @@
         @apply flex h-1/10 justify-between items-center py-5 px-10 border-b border-gray-200 rounded-lg max-sm:flex-col max-sm:h-30;
     }
 
-  .shopping-cart-section {
-      @apply w-1/2 border-1 border-gray-200 p-10 rounded-md;
-  }
+    .shopping-cart-section {
+        @apply w-1/2 max-sm:w-[100%] border-1 border-gray-200 p-10 rounded-md;
+    }
 }
