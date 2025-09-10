@@ -5,7 +5,6 @@ const flowerSchema = new Schema(
         title: String,
         imageUrl: String,
         price: Number,
-        count: Number,
         shop: { type: mongoose.Schema.Types.ObjectId, ref: "Shop" }
     },
     {
