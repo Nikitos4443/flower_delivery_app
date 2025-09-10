@@ -7,7 +7,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -15,8 +14,12 @@ import {
 } from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
 import {Button} from "@/components/ui/button";
-import {useAppSelector} from "@/lib/redux/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/redux/hooks";
 import ShoppingCartCard from "@/components/ShoppingCartCard";
+import {ToastContainer, toast} from "react-toastify";
+import { useRouter } from "next/navigation";
+import {useCallback} from "react";
+import {clear} from "@/lib/redux/slices/cart";
 
 const formSchema = z.object({
     name: z.string("Name must contain minimum 2 and maximum 50 symbols").min(2).max(50),
@@ -26,8 +29,14 @@ const formSchema = z.object({
 })
 
 function ShoppingCart() {
+    const router = useRouter();
 
     const cart = useAppSelector((state) => state.cart.chosenFlowers);
+    const dispatch = useAppDispatch();
+
+    const totalPrice = useCallback(() => {
+        return cart.reduce((acc, flower) => acc + flower.price * flower.count, 0)
+    }, [cart])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -39,8 +48,31 @@ function ShoppingCart() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+
+        const dto = {
+            userName: values.name,
+            userEmail: values.email,
+            userPhone: values.phone,
+            userAddress: values.address,
+            flowers: cart,
+            totalPrice: totalPrice()
+        }
+
+        const response = await fetch("/api/orders", {
+            method: "POST",
+            body: JSON.stringify(dto)
+        })
+
+        if(!response.ok) {
+            toast.error("Could not create order");
+        }
+
+        dispatch(clear());
+
+        const data = await response.json();
+        console.log(data)
+        router.push(`/orders/${data.order._id}`);
     }
 
     return (
@@ -121,12 +153,13 @@ function ShoppingCart() {
             </div>
             <div className="flex justify-end ">
                 <div className="flex gap-5 items-center">
-                    <span>Total sum: {cart.reduce((acc, flower) => acc + flower.price * flower.count, 0)}</span>
+                    <span>Total sum: {totalPrice()}</span>
                     <Button type="submit" form="shopping-form" disabled={cart.length === 0}>
                         Submit
                     </Button>
                 </div>
             </div>
+            <ToastContainer />
         </main>
     );
 }
