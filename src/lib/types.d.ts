@@ -14,4 +14,15 @@ type Shop = {
 
 type CardProps = Flower;
 
+type Order = {
+    _id: string;
+    userPhone: string;
+    userEmail: string;
+    userAddress: string;
+    userName: string;
+    flowers: Flower[];
+    totalPrice: number;
+    createdAt: string;
+}
+
 type Sorting =  'price' | 'createdAt' | null;
