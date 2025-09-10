@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form"
 import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 
+import validator from 'validator'
 import {
     Form,
     FormControl,
@@ -24,11 +25,13 @@ import {clear} from "@/lib/redux/slices/cart";
 const formSchema = z.object({
     name: z.string("Name must contain minimum 2 and maximum 50 symbols").min(2).max(50),
     email: z.email("Incorrect email"),
-    phone: z.string("Incorrect phone number"),
+    phone: z.string().refine((val) => validator.isMobilePhone(val, "any"), {
+        message: "Incorrect phone number",
+    }),
     address: z.string()
 })
 
-function ShoppingCart() {
+export default function ShoppingCart() {
     const router = useRouter();
 
     const cart = useAppSelector((state) => state.cart.chosenFlowers);
@@ -77,7 +80,7 @@ function ShoppingCart() {
 
     return (
         <main>
-            <div className="flex gap-5 h-6/7 overflow-hidden">
+            <div className="flex gap-5 h-6/7 overflow-hidden max-sm:flex-col">
                 <section className="shopping-cart-section h-fit">
                     <Form {...form}>
                         <form id="shopping-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-15">
@@ -164,4 +167,3 @@ function ShoppingCart() {
     );
 }
 
-export default ShoppingCart;

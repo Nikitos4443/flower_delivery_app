@@ -8,11 +8,11 @@ function ShoppingCartCard(props: CardProps & {count: number}) {
 
     return (
         <div className="flex items-center justify-between gap-4 border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 max-sm:flex-col">
                 <img
                     src={props.imageUrl}
                     alt={props.title}
-                    className="w-20 h-20 object-cover rounded-md"
+                    className="w-20 h-20 object-contain rounded-md"
                 />
 
                 <div className="flex-1">
